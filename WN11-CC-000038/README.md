@@ -40,6 +40,7 @@ Required registry configuration:
 The Windows 11 VM was scanned using the Windows 11 STIG Audit Policy.
 
 **Initial result: FAIL**
+<img width="1316" height="770" alt="image" src="https://github.com/user-attachments/assets/df3f8b23-1952-43e2-8eb1-f8de4755ddf3" />
 
 
 
@@ -95,6 +96,7 @@ Tenable Validation
 The system was rescanned with Tenable after the PowerShell remediation.
 
 Final result: PASS
+<img width="1491" height="679" alt="image" src="https://github.com/user-attachments/assets/4ffa2c95-465c-4ea4-b92e-a8b23897ad5e" />
 
 Result
 WN11-CC-000038 successfully remediated and validated.
