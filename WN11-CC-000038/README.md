@@ -62,7 +62,8 @@ The policy was then configured manually.
 
 **Result: PASS**
 
-![Manual PASS](screenshots/02-manual-pass.png)
+![Manual PASS](<img width="1381" height="752" alt="image" src="https://github.com/user-attachments/assets/6d095111-728d-4500-8887-b2c115ed87b7" />
+)
 
 ## Reversion Test
 
