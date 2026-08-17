@@ -48,7 +48,7 @@ The Windows 11 VM was scanned using the Windows 11 STIG Audit Policy.
 
 The STIG requires the following Group Policy setting:
 
-```text
+
 Computer Configuration
 → Administrative Templates
 → MS Security Guide
