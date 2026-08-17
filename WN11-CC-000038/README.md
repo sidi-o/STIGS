@@ -79,7 +79,7 @@ The configuration was automated using PowerShell by setting:
 
 UseLogonCredential = 0
 
-See Remediation.ps1.
+See WN11-CC-000038.ps1.
 
 Local Verification
 The registry configuration was verified locally:
