@@ -15,9 +15,7 @@
 
 ## Security Context
 
-WDigest Authentication can cause credentials to be stored in plaintext
-in LSASS memory. This can increase the risk of credential theft by
-attackers who gain access to the system.
+WDigest Authentication can cause credentials to be stored in plaintext in LSASS memory. This can increase the risk of credential theft by attackers who gain access to the system.
 
 This STIG ensures that WDigest plaintext credential use remains disabled.
 
@@ -40,54 +38,70 @@ Required registry configuration:
 The Windows 11 VM was scanned using the Windows 11 STIG Audit Policy.
 
 **Initial result: FAIL**
-<img width="1316" height="770" alt="image" src="https://github.com/user-attachments/assets/df3f8b23-1952-43e2-8eb1-f8de4755ddf3" />
 
-
+![Initial FAIL](screenshots/01-initial-fail.png)
 
 ## Manual Remediation
 
 The STIG requires the following Group Policy setting:
 
-
-Computer Configuration
-→ Administrative Templates
-→ MS Security Guide
-→ WDigest Authentication
-→ Disabled
+**Computer Configuration → Administrative Templates → MS Security Guide → WDigest Authentication → Disabled**
 
 The MS Security Guide template was not initially available.
 
 The required STIG GPO package was used to obtain the required templates:
 
+```text
 SecGuide.admx → C:\Windows\PolicyDefinitions\
 SecGuide.adml → C:\Windows\PolicyDefinitions\en-US\
+```
 
 The policy was then configured manually.
 
-Result: PASS
+**Result: PASS**
 
-Reversion Test
+![Manual PASS](screenshots/02-manual-pass.png)
+
+## Reversion Test
+
 The manual remediation was reverted and the system was rescanned.
 
-Result: FAIL
+**Result: FAIL**
 
-This confirmed that the configured security setting directly affected
-the STIG check.
+This confirmed that the configured security setting directly affected the STIG check.
+
+![Reversion FAIL](screenshots/03-revert-fail.png)
 
 ## PowerShell Remediation
-The configuration was automated using PowerShell
 
-See WN11-CC-000038.ps1
+The configuration was automated using PowerShell by setting `UseLogonCredential` to `0`.
 
+See [`WN11-CC-000038.ps1`](WN11-CC-000038.ps1).
 
-Tenable Validation
+![PowerShell Remediation](screenshots/04-powershell.png)
+
+## Local Verification
+
+The registry configuration was verified locally:
+
+```powershell
+Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest' -Name 'UseLogonCredential'
+```
+
+Expected result:
+
+```text
+UseLogonCredential : 0
+```
+
+## Tenable Validation
+
 The system was rescanned with Tenable after the PowerShell remediation.
 
-Final result: PASS
-<img width="1491" height="679" alt="image" src="https://github.com/user-attachments/assets/4ffa2c95-465c-4ea4-b92e-a8b23897ad5e" />
+**Final result: PASS**
 
-Result
-WN11-CC-000038 successfully remediated and validated.
+![Tenable PASS](screenshots/05-tenable-pass.png)
 
+## Result
 
-
+**WN11-CC-000038 successfully remediated and validated.**
