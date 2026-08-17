@@ -39,7 +39,8 @@ The Windows 11 VM was scanned using the Windows 11 STIG Audit Policy.
 
 **Initial result: FAIL**
 
-![<img width="1383" height="765" alt="image" src="https://github.com/user-attachments/assets/d7a505bf-2bbb-485d-91f8-ee2d48b2329c" />](screenshots/01-initial-fail.png) 
+![Initial FAIL](https://github.com/user-attachments/assets/d7a505bf-2bbb-485d-91f8-ee2d48b2329c)
+
 
 
 ## Manual Remediation
