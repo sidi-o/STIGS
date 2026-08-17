@@ -74,21 +74,11 @@ Result: FAIL
 This confirmed that the configured security setting directly affected
 the STIG check.
 
-PowerShell Remediation
-The configuration was automated using PowerShell by setting:
+## PowerShell Remediation
+The configuration was automated using PowerShell
 
-UseLogonCredential = 0
+See WN11-CC-000038.ps1
 
-See WN11-CC-000038.ps1.
-
-Local Verification
-The registry configuration was verified locally:
-
-
-
-Expected result:
-
-UseLogonCredential : 0
 
 Tenable Validation
 The system was rescanned with Tenable after the PowerShell remediation.
