@@ -84,9 +84,7 @@ See WN11-CC-000038.ps1.
 Local Verification
 The registry configuration was verified locally:
 
-Get-ItemProperty `
-    -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest' `
-    -Name 'UseLogonCredential'
+
 
 Expected result:
 
@@ -102,31 +100,4 @@ Result
 WN11-CC-000038 successfully remediated and validated.
 
 
-## `Remediation.ps1`
 
-```powershell
-# WN11-CC-000038 - Disable WDigest plaintext credential use
-
-$Path = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest'
-$Name = 'UseLogonCredential'
-
-# Create the registry key if required
-New-Item -Path $Path -Force | Out-Null
-
-# Set UseLogonCredential to REG_DWORD 0
-New-ItemProperty `
-    -Path $Path `
-    -Name $Name `
-    -PropertyType DWord `
-    -Value 0 `
-    -Force | Out-Null
-
-# Verify the configuration
-$Value = (Get-ItemProperty -Path $Path -Name $Name).$Name
-
-if ($Value -eq 0) {
-    Write-Host "WN11-CC-000038 successfully remediated." -ForegroundColor Green
-}
-else {
-    Write-Error "Remediation failed."
-}
