@@ -1,5 +1,3 @@
-
-
 WN11-CC-000038 — WDigest Authentication
 Overview
 
