@@ -72,7 +72,7 @@ The manual remediation was reverted and the system was rescanned.
 
 This confirmed that the configured security setting directly affected the STIG check.
 
-![Reversion FAIL](screenshots/03-revert-fail.png)
+![Reversion FAIL](https://github.com/user-attachments/assets/f9009be0-bd26-45fb-8e06-4445b302398f)
 
 ## PowerShell Remediation
 
@@ -80,7 +80,7 @@ The configuration was automated using PowerShell by setting `UseLogonCredential`
 
 See [`WN11-CC-000038.ps1`](WN11-CC-000038.ps1).
 
-![PowerShell Remediation](screenshots/04-powershell.png)
+![PowerShell Remediation](https://github.com/user-attachments/assets/38710134-1d66-46cd-8575-1bba5631d7cd)
 
 ## Local Verification
 
@@ -102,7 +102,7 @@ The system was rescanned with Tenable after the PowerShell remediation.
 
 **Final result: PASS**
 
-![Tenable PASS](screenshots/05-tenable-pass.png)
+![Tenable PASS](https://github.com/user-attachments/assets/c05495e9-ccb7-4d92-b785-1febac7f6363)
 
 ## Result
 
