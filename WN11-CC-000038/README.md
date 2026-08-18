@@ -50,7 +50,7 @@ The STIG requires the following Group Policy setting:
 
 The MS Security Guide template was not initially available.
 
-The required STIG GPO package was used to obtain the required templates:
+The required STIG GPO package was used to obtain the required templates: https://www.cyber.mil/stigs/gpo/
 
 ```text
 SecGuide.admx → C:\Windows\PolicyDefinitions\
