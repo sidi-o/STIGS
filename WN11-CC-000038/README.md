@@ -9,10 +9,11 @@
 | CCI | CCI-000381 |
 | Vulnerability ID | V-253358 |
 | Platform | Windows 11 |
-| Test Date | 2026-08-17 |
+| Remediation | Disable WDigest Authentication |
+| STIG Version  | V2R7 |
 | PowerShell | Windows PowerShell 5.1 |
-| Validation | Tenable |
-
+| Validation | Tenable | Windows 11 STIG Audit Policy | Local Verification |
+| Test Date | 2026-08-17 |
 ## Security Context
 
 WDigest Authentication can cause plaintext credentials to be stored in LSASS memory. This can increase the risk of credential theft.
@@ -68,7 +69,7 @@ The manual remediation was reverted and the system was rescanned.
 
 **Result: FAIL**
 
-This confirmed that the configured security setting directly affected the STIG check.
+The result provides evidence from the tested environment that the configuration change affected the WN11-CC-000038 STIG check.
 
 ![Reversion FAIL](Screenshots/03-revert-fail.png)
 
