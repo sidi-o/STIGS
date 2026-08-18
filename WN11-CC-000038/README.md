@@ -39,7 +39,7 @@ The Windows 11 VM was scanned using the Windows 11 STIG Audit Policy.
 
 **Initial result: FAIL**
 
-![Initial FAIL](screenshots/01-initial-fail.png)
+![Initial FAIL](Screenshots/01-initial-fail.png)
 
 ## Manual Remediation
 
@@ -60,7 +60,7 @@ The policy was then configured manually.
 
 **Result: PASS**
 
-![Manual PASS](screenshots/02-manual-pass.png)
+![Manual PASS](Screenshots/02-manual-pass.png)
 
 ## Reversion Test
 
@@ -70,7 +70,7 @@ The manual remediation was reverted and the system was rescanned.
 
 This confirmed that the configured security setting directly affected the STIG check.
 
-![Reversion FAIL](screenshots/03-revert-fail.png)
+![Reversion FAIL](Screenshots/03-revert-fail.png)
 
 ## PowerShell Remediation
 
@@ -78,7 +78,7 @@ The configuration was automated using PowerShell by setting `UseLogonCredential`
 
 See [`WN11-CC-000038.ps1`](WN11-CC-000038.ps1).
 
-![PowerShell Remediation](screenshots/04-powershell.png)
+![PowerShell Remediation](Screenshots/04-powershell.png)
 
 ## Local Verification
 
@@ -100,7 +100,7 @@ The system was rescanned with Tenable after the PowerShell remediation.
 
 **Final result: PASS**
 
-![Tenable PASS](screenshots/05-tenable-pass.png)
+![Tenable PASS](Screenshots/05-tenable-pass.png)
 
 ## Result
 
