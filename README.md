@@ -71,5 +71,3 @@ Document the complete remediation process, including:
 Publish the tested PowerShell remediation and supporting documentation
 to GitHub.
 
-The completed remediation is also recorded in the project's experience
-tracking spreadsheet.
