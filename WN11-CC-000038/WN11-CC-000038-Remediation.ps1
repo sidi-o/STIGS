@@ -1,5 +1,7 @@
 #Requires -RunAsAdministrator
 
+.SYNOPSIS
+This control enforces the strict deactivation of the legacy WDigest authentication protocol on Windows 11.
 
 .NOTES
     Author          : Sidi O
