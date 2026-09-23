@@ -44,18 +44,10 @@ if (-not (Test-Path -LiteralPath $RegistryPath)) {
 }
 
 # Configure Script Block Logging
-New-ItemProperty `
-    -Path $RegistryPath `
-    -Name $ValueName `
-    -PropertyType DWord `
-    -Value $ExpectedValue `
-    -Force | Out-Null
+New-ItemProperty -Path $RegistryPath -Name $ValueName -PropertyType DWord  -Value $ExpectedValue -Force | Out-Null
 
 # Verify configuration
-$configuredValue = Get-ItemPropertyValue `
-    -Path $RegistryPath `
-    -Name $ValueName `
-    -ErrorAction Stop
+$configuredValue = Get-ItemPropertyValue  -Path $RegistryPath -Name $ValueName -ErrorAction Stop
 
 if ($configuredValue -eq $ExpectedValue) {
     Write-Output 'PASS: PowerShell Script Block Logging is enabled.'
