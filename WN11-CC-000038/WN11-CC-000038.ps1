@@ -23,7 +23,7 @@ This control enforces the strict deactivation of the legacy WDigest authenticati
 .USAGE
     Put any usage instructions here.
     Example syntax:
-    PS C:\> .\SWN11-CC-000038.ps1 
+    PS C:\> .\WN11-CC-000038.ps1 
 #>
 
 # Configure WDigest to not use plaintext credentials
@@ -33,8 +33,7 @@ $Path = 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest'
 New-Item -Path $Path -Force | Out-Null
 
 # Set UseLogonCredential to 0 (REG_DWORD)
-New-ItemProperty -Path $Path -Name 'UseLogonCredential' `
-    -PropertyType DWord -Value 0 -Force | Out-Null
+New-ItemProperty -Path $Path -Name 'UseLogonCredential' -PropertyType DWord -Value 0 -Force | Out-Null
 
 # Verify the configuration
 $Value = (Get-ItemProperty -Path $Path -Name 'UseLogonCredential').UseLogonCredential
