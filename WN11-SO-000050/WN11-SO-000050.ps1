@@ -53,7 +53,7 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
-# Vraie vérification automatique du texte renvoyé par auditpol (gère le français et l'anglais)
+# Language-agnostic automated validation of auditpol output
 if ($Result -match "Success" -or $Result -match "Succès") {
     Write-Host "PASS: Process Creation Success auditing is enabled." -ForegroundColor Green
 } else {
@@ -62,3 +62,5 @@ if ($Result -match "Success" -or $Result -match "Succès") {
 }
 
 Write-Host "`nNote: WN11-SO-000030 must also be compliant for Advanced Audit Policy subcategories to override legacy audit policy categories." -ForegroundColor Yellow
+
+
