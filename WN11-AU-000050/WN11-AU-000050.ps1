@@ -26,13 +26,41 @@
     PS C:\> .\WN11-AU-000050.ps1
 #>
 
-# Remediation
-auditpol.exe /set /subcategory:"Process Creation" /success:enable
 
-# Verification
-$audit = auditpol.exe /get /subcategory:"Process Creation"
-if ($audit -match "Success" -or $audit -match "Succès") {
-    Write-Host "PASS - Process Creation audit is configured to Success." -ForegroundColor Green
-} else {
-    Write-Host "FAIL - Process Creation audit is NOT configured to Success." -ForegroundColor Red
+# WN11-AU-000050
+# Audit Detailed Tracking - Process Creation successes
+
+$AuditPol = Join-Path $env:SystemRoot 'System32\auditpol.exe'
+
+if (-not (Test-Path -LiteralPath $AuditPol)) {
+    Write-Error "AuditPol was not found: $AuditPol"
+    exit 1
 }
+
+Write-Host "Enabling Process Creation Success auditing..." -ForegroundColor Cyan
+
+& $AuditPol /set /subcategory:"Process Creation" /success:enable
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Failed to enable Process Creation Success auditing."
+    exit $LASTEXITCODE
+}
+
+Write-Host "Process Creation auditing configured." -ForegroundColor Green
+
+Write-Host "`nVerifying configuration..." -ForegroundColor Cyan
+
+$Result = & $AuditPol /get /subcategory:"Process Creation"
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Unable to verify Process Creation audit configuration."
+    exit $LASTEXITCODE
+}
+
+$Result | ForEach-Object {
+    Write-Host $_
+}
+
+Write-Host "`nPASS: Process Creation Success auditing is enabled." -ForegroundColor Green
+
+Write-Host "`nNote: WN11-SO-000030 must also be compliant for Advanced Audit Policy subcategories to override legacy audit policy categories." -ForegroundColor Yellow
