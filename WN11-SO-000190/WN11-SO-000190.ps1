@@ -6,7 +6,7 @@
     
 .NOTES
     Author          : Sidi O
-    LinkedIn        : linkedin.com/sidi-o
+    LinkedIn        : linkedin.com/in/sidi-o
     GitHub          : github.com/sidi-o
     Date Created    : 2026-09-23
     Last Modified   : 2026-09-23
