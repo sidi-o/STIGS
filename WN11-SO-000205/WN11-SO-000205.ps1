@@ -1,6 +1,31 @@
+<#
+.SYNOPSIS
+    This PowerShell script ensures that the LanMan authentication level is set to send NTLMv2 response only, and to refuse LM and NTLM.
+    
+.NOTES
+    Author          : Sidi O
+    LinkedIn        : linkedin.com/in/sidi-o
+    GitHub          : github.com/sidi-o
+    Date Created    : 2026-08-20
+    Last Modified   : 2026-08-20
+    Version         : 1.0
+    CVEs            : N/A
+    Plugin IDs      : N/A
+    STIG-ID         : WN11-SO-000205
 
+.TESTED ON
+    Date(s) Tested  : 2026-08-20
+    Tested By       : Sidi / sidi-o
+    Systems Tested  : Windows 11
+    PowerShell Ver. : 5.1
 
-#Remediation
+.USAGE
+    Put any usage instructions here.
+    Example syntax:
+    PS C:\> .\WN11-SO-000205.ps1 
+#>
+
+# Remediation
 $RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
 $ValueName    = "LmCompatibilityLevel"
 $ValueData    = 5
@@ -11,26 +36,16 @@ if (-not (Test-Path -Path $RegistryPath)) {
 }
 
 # Configure NTLMv2 only
-New-ItemProperty `
-    -Path $RegistryPath `
-    -Name $ValueName `
-    -PropertyType DWord `
-    -Value $ValueData `
-    -Force | Out-Null
+New-ItemProperty -Path $RegistryPath -Name $ValueName -PropertyType DWord -Value $ValueData -Force | Out-Null
 
 Write-Host "LmCompatibilityLevel configured to $ValueData."
 
+# Verification
+$value = (Get-ItemProperty -Path $RegistryPath -Name $ValueName -ErrorAction SilentlyContinue).LmCompatibilityLevel
 
-
-#Verificaiton
-$value = (Get-ItemProperty `
-    -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" `
-    -Name "LmCompatibilityLevel" `
-    -ErrorAction SilentlyContinue).LmCompatibilityLevel
-
-if ($value -eq 5) {
-    Write-Host "PASS - LmCompatibilityLevel is configured to 5." -ForegroundColor Green
+if ($value -eq $ValueData) {
+    Write-Host "PASS - LmCompatibilityLevel is configured to $ValueData." -ForegroundColor Green
 }
 else {
-    Write-Host "FAIL - LmCompatibilityLevel is not configured to 5." -ForegroundColor Red
+    Write-Host "FAIL - LmCompatibilityLevel is not configured to $ValueData." -ForegroundColor Red
 }
