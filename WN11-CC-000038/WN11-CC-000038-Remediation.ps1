@@ -1,5 +1,8 @@
+#Requires -RunAsAdministrator
+
+
 .NOTES
-    Author          : Sidi Ouattara
+    Author          : Sidi O
     LinkedIn        : linkedin.com/in/sidi-o
     GitHub          : github.com/sidi-o
     Date Created    : 2026-08-17
