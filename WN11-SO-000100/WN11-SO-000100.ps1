@@ -1,7 +1,6 @@
 #requires -RunAsAdministrator
 
 
-
 <#
 .SYNOPSIS
     This PowerShell script configures the Windows SMB client to always perform packet signing, protecting communications from tampering.
