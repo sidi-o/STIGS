@@ -1,0 +1,66 @@
+#Requires -RunAsAdministrator
+
+<#
+.SYNOPSIS
+    This PowerShell script defines Hardened UNC Paths to require mutual authentication and integrity checks for critical network shares like SYSVOL and NETLOGON.
+    
+.NOTES
+    Author          : Sidi O
+    LinkedIn        : linkedin.com/in/sidi-o
+    GitHub          : github.com/sidi-o
+    Date Created    : 2026-09-23
+    Last Modified   : 2026-09-23
+    Version         : 1.0
+    CVEs            : N/A
+    Plugin IDs      : N/A
+    STIG-ID         : WN11-CC-000050
+
+.TESTED ON
+    Date(s) Tested  : 2026-09-23
+    Tested By       : Sidi O
+    Systems Tested  : Windows 11
+    PowerShell Ver. : 5.1
+
+.USAGE
+    Example syntax:
+    PS C:\> .\WN11-CC-000050.ps1
+#>
+
+
+$RegistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths'
+
+$HardenedPaths = @{
+    '\\*\NETLOGON' = 'RequireMutualAuthentication=1, RequireIntegrity=1'
+    '\\*\SYSVOL'   = 'RequireMutualAuthentication=1, RequireIntegrity=1'
+}
+
+try {
+    # Create the Hardened UNC Paths policy key if it does not exist
+    if (-not (Test-Path -LiteralPath $RegistryPath)) {
+        New-Item -Path $RegistryPath -Force | Out-Null
+    }
+
+    # Configure required hardened UNC paths
+    foreach ($Entry in $HardenedPaths.GetEnumerator()) {
+        New-ItemProperty -Path $RegistryPath -Name $Entry.Key -PropertyType String -Value $Entry.Value -Force | Out-Null
+    }
+
+    # Verify both settings
+    $Netlogon = Get-ItemPropertyValue -Path $RegistryPath -Name '\\*\NETLOGON' -ErrorAction Stop
+
+    $Sysvol = Get-ItemPropertyValue -Path $RegistryPath -Name '\\*\SYSVOL' -ErrorAction Stop
+
+    $Expected = 'RequireMutualAuthentication=1, RequireIntegrity=1'
+
+    if (($Netlogon -eq $Expected) -and ($Sysvol -eq $Expected)) {
+        Write-Output 'SUCCESS: Hardened UNC paths for NETLOGON and SYSVOL are correctly configured.'
+        exit 0
+    }
+
+    Write-Error 'FAILED: One or more Hardened UNC Paths values do not match the required configuration.'
+    exit 1
+}
+catch {
+    Write-Error "FAILED: Unable to configure Hardened UNC Paths. $($_.Exception.Message)"
+    exit 1
+}
